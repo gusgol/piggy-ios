@@ -26,8 +26,21 @@
     },
   ],
   "files": [
-    { "kind": "folder", "path": "Piggy", "target-membership": [ "Piggy" ] },
     {
+      "kind": "folder",
+      "path": "Piggy",
+      "target-membership": [
+        "Piggy",
+      ],
+      "membership-exceptions": [
+        {
+          "target": "Piggy",
+          "exclusions": [
+            "Info.plist",
+          ],
+        },
+      ],
+    }, {
       "kind": "group",
       "name": "Products",
       "children": [
@@ -76,6 +89,7 @@
         "CURRENT_PROJECT_VERSION": "1",
         "ENABLE_PREVIEWS": "YES",
         "GENERATE_INFOPLIST_FILE": "YES",
+        "INFOPLIST_FILE": "Piggy/Info.plist",
         "INFOPLIST_KEY_UIApplicationSceneManifest_Generation": "YES",
         "INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents": "YES",
         "INFOPLIST_KEY_UILaunchScreen_Generation": "YES",
