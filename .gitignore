@@ -1,0 +1,40 @@
+# macOS
+.DS_Store
+
+# Xcode — per-user state
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+
+# Xcode — build output
+build/
+DerivedData/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.xcresult
+
+# Swift Package Manager
+# Package.resolved is committed (pins dependency versions, like a Gradle lockfile).
+.build/
+.swiftpm/
+Packages/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Firebase config — contains project API keys; download from the Firebase console
+GoogleService-Info.plist
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Secrets / local config
+*.xcconfig.local
+.env

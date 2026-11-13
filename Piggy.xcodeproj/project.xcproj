@@ -10,6 +10,21 @@
       "Base",
     ],
   },
+  "packages": [
+    {
+      "kind": "remote",
+      "repository": "https://github.com/firebase/firebase-ios-sdk",
+      "version": {
+        "up-to-next-major-version": "13.1.1",
+      },
+    }, {
+      "kind": "remote",
+      "repository": "https://github.com/google/GoogleSignIn-iOS",
+      "version": {
+        "up-to-next-major-version": "10.1.0",
+      },
+    },
+  ],
   "files": [
     { "kind": "folder", "path": "Piggy", "target-membership": [ "Piggy" ] },
     {
@@ -30,6 +45,29 @@
         "compile-sources",
         "frameworks",
         "resources",
+      ],
+      "package-product-members": [
+        {
+          "package": "GoogleSignIn-iOS",
+          "product-name": "GoogleSignIn",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "GoogleSignIn-iOS",
+          "product-name": "GoogleSignInSwift",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "firebase-ios-sdk",
+          "product-name": "FirebaseAILogic",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "firebase-ios-sdk",
+          "product-name": "FirebaseAuth",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "firebase-ios-sdk",
+          "product-name": "FirebaseFirestore",
+          "build-phase": { "build-phase": "frameworks" },
+        },
       ],
       "build-settings": {
         "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
