@@ -3,12 +3,6 @@ import Observation
 
 @Observable
 final class ExpensesListViewModel {
-    enum LoadState: Equatable {
-        case loading
-        case loaded
-        case failed(message: String)
-    }
-
     struct DaySection: Identifiable {
         let day: Date
         let expenses: [Expense]

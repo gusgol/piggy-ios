@@ -48,8 +48,8 @@ Piggy/
 - [x] Project foundation: packages, Firebase, domain models, repository protocols
 - [x] Auth: Google Sign-In
 - [ ] Review Sign in with Apple before App Store release (App Review Guideline 4.8)
-- [ ] Expenses CRUD
-- [ ] Categories
+- [x] Expenses CRUD
+- [x] Categories
 - [ ] Trends
 - [ ] AI Import
 - [ ] Settings & polish
