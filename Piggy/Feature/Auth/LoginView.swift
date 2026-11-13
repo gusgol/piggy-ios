@@ -33,15 +33,20 @@ struct LoginContent: View {
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
-        VStack(spacing: 32) {
+        VStack {
             Spacer()
 
             VStack(spacing: 12) {
+                // App-icon-style tile: a `.tint` fill (the AccentColor asset) with a white glyph,
+                // and continuous ("squircle") corners like real app icons.
                 Image(systemName: "banknote.fill")
-                    .font(.system(size: 56))
-                    .foregroundStyle(.tint)
+                    .font(.system(size: 40))
+                    .foregroundStyle(.white)
+                    .frame(width: 88, height: 88)
+                    .background(.tint, in: .rect(cornerRadius: 22, style: .continuous))
+                    .padding(.bottom, 8)
                 Text("Piggy")
-                    .font(.largeTitle.bold())
+                    .font(.brand(.largeTitle))
                 Text("Track where your money goes.")
                     .font(.body)
                     .foregroundStyle(.secondary)
@@ -65,8 +70,7 @@ struct LoginContent: View {
                 }
             }
             .frame(maxWidth: 384)
-            .padding(.horizontal, 24)
-            .padding(.bottom, 24)
+            .padding()
         }
         .alert(
             "Sign-in failed",
@@ -84,6 +88,7 @@ struct LoginContent: View {
     LoginContent(isLoading: false, errorMessage: nil, onGoogleSignIn: {}, onErrorDismiss: {})
 }
 
-#Preview("Loading") {
+#Preview("Loading · Dark") {
     LoginContent(isLoading: true, errorMessage: nil, onGoogleSignIn: {}, onErrorDismiss: {})
+        .preferredColorScheme(.dark)
 }

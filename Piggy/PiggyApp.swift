@@ -24,11 +24,20 @@ struct PiggyApp: App {
         if let clientID = FirebaseApp.app()?.options.clientID {
             GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: clientID)
         }
+
+        PiggyTheme.configureAppearance()
     }
 
     var body: some Scene {
         WindowGroup {
             RootView()
+                // App-wide brand tint, the iOS counterpart of Material's `primary`. Buttons,
+                // links, toggles, the selected tab and `.tint` fills all read it from the
+                // environment. In principle the AccentColor asset is applied automatically
+                // (build setting ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME), but in this
+                // toolchain `Color.accentColor` still resolved to system blue, so it's set
+                // explicitly. `.accent` is the symbol Xcode generates for the AccentColor asset.
+                .tint(Color(.accent))
                 // Hands the `com.googleusercontent.apps...` redirect back to the SDK.
                 // This is why the URL scheme had to be registered in Info.plist.
                 .onOpenURL { url in
