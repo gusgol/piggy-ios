@@ -52,17 +52,8 @@ nonisolated struct MonthlyExpensesSummary: Hashable, Sendable {
         fixedFraction = total > 0 ? min(max(fixedTotal / total, 0), 1) : 0
         expenseCount = expenses.count
 
-        let categoriesByID = Dictionary(uniqueKeysWithValues: categories.map { ($0.id, $0) })
-
-        // Attach category display fields to each expense (they aren't stored on the expense document).
-        let enriched = expenses.map { expense in
-            guard let category = categoriesByID[expense.categoryId] else { return expense }
-            var copy = expense
-            copy.categoryName = category.name
-            copy.categoryIcon = category.icon
-            copy.categoryColor = category.color
-            return copy
-        }
+        let categoriesByID = Dictionary(categories.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
+        let enriched = expenses.enriched(with: categories)
 
         // Filter options: the user's categories, plus a fallback for expenses that point to a
         // deleted (or not-yet-synced) category. Categories in use come first; the original

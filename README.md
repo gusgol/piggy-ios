@@ -50,6 +50,6 @@ Piggy/
 - [ ] Review Sign in with Apple before App Store release (App Review Guideline 4.8)
 - [x] Expenses CRUD
 - [x] Categories
-- [ ] Trends
+- [x] Trends
 - [ ] AI Import
 - [ ] Settings & polish

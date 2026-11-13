@@ -3,7 +3,6 @@ import SwiftUI
 /// Month switcher, the month's total, and the fixed vs. variable split.
 struct ExpensesSummarySection: View {
     let month: YearMonth
-    let isCurrentMonth: Bool
     let summary: MonthlyExpensesSummary
     let onPrevious: () -> Void
     let onNext: () -> Void
@@ -12,7 +11,7 @@ struct ExpensesSummarySection: View {
     var body: some View {
         Section {
             VStack(alignment: .leading, spacing: 20) {
-                monthSwitcher
+                MonthSwitcher(month: month, onPrevious: onPrevious, onNext: onNext, onCurrent: onCurrent)
                 total
                 if summary.total > 0 {
                     SpendingSplitView(
@@ -24,29 +23,6 @@ struct ExpensesSummarySection: View {
             }
             .padding(.vertical, 4)
         }
-    }
-
-    private var monthSwitcher: some View {
-        HStack {
-            Button("Previous Month", systemImage: "chevron.left", action: onPrevious)
-                .labelStyle(.iconOnly)
-            Spacer()
-            // Tapping the month jumps back to today, a common iOS calendar affordance. It isn't
-            // `.disabled` on the current month, because disabled buttons render dimmed and the
-            // title would look inactive.
-            Button(action: onCurrent) {
-                Text(month.formatted)
-                    .font(.headline)
-                    .foregroundStyle(.primary)
-            }
-            .accessibilityHint(isCurrentMonth ? "" : "Shows the current month")
-            Spacer()
-            Button("Next Month", systemImage: "chevron.right", action: onNext)
-                .labelStyle(.iconOnly)
-        }
-        // Inside a List row, any tap would trigger *every* button in the row. `.borderless`
-        // makes each button handle only its own taps.
-        .buttonStyle(.borderless)
     }
 
     private var total: some View {
@@ -103,7 +79,7 @@ struct ExpensesInsightSection: View {
 #Preview {
     let summary = MonthlyExpensesSummary(expenses: [.preview, .previewFixed], categories: [], selectedCategoryID: nil)
     List {
-        ExpensesSummarySection(month: .now(), isCurrentMonth: true, summary: summary,
+        ExpensesSummarySection(month: .now(), summary: summary,
                                onPrevious: {}, onNext: {}, onCurrent: {})
         if let insight = summary.insight {
             ExpensesInsightSection(insight: insight)

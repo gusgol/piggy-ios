@@ -42,7 +42,6 @@ private struct ExpensesListContent: View {
         List {
             ExpensesSummarySection(
                 month: viewModel.month,
-                isCurrentMonth: viewModel.isCurrentMonth,
                 summary: summary,
                 onPrevious: viewModel.showPreviousMonth,
                 onNext: viewModel.showNextMonth,

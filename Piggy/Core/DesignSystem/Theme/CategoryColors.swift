@@ -23,6 +23,9 @@ nonisolated struct CategoryColorPalette: Hashable, Sendable {
     let avatarContent: Color
     let badgeContainer: Color
     let badgeContent: Color
+    /// For large chart areas (donut slices, bars): softer than `dot`, which is tuned for small
+    /// markers, so a chart full of categories doesn't look garish. iOS-only addition.
+    let chart: Color
 
     init(colorHex: String?, categoryName: String? = nil) {
         let seed = HSL(rgb: Self.parseHex(colorHex) ?? Self.semanticSeed(forName: categoryName))
@@ -36,6 +39,7 @@ nonisolated struct CategoryColorPalette: Hashable, Sendable {
             avatarContent = .primary
             badgeContainer = Color(.secondarySystemFill)
             badgeContent = .secondary
+            chart = Color(.systemGray3)
             return
         }
 
@@ -59,6 +63,10 @@ nonisolated struct CategoryColorPalette: Hashable, Sendable {
             dark: darkTint.uiColor(alpha: 0.18)
         )
         badgeContent = .dynamic(light: lightDeep.uiColor(), dark: darkLabel.uiColor())
+        chart = .dynamic(
+            light: HSL(h: h, s: s.clamped(0.45, 0.70), l: 0.62).uiColor(),
+            dark: HSL(h: h, s: s.clamped(0.45, 0.70), l: 0.60).uiColor()
+        )
     }
 
     // MARK: - Seeds

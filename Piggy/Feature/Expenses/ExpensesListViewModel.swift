@@ -43,8 +43,6 @@ final class ExpensesListViewModel {
             .sorted { $0.day > $1.day }
     }
 
-    var isCurrentMonth: Bool { month == .now() }
-
     // MARK: Dependencies
 
     private let expenseRepository: any ExpenseRepository
