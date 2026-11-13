@@ -18,13 +18,15 @@ final class AppDependencies {
 
     let authRepository: any AuthRepository
     let userSession: UserSession
-    // expenseRepository / categoryRepository are added in Phase 2, along with their
-    // Firestore implementations.
+    let expenseRepository: any ExpenseRepository
+    let categoryRepository: any CategoryRepository
 
     private init() {
         let authRepository = FirebaseAuthRepository()
         self.authRepository = authRepository
         self.userSession = UserSession(authRepository: authRepository)
+        self.expenseRepository = FirestoreExpenseRepository()
+        self.categoryRepository = FirestoreCategoryRepository()
     }
 }
 
@@ -39,4 +41,6 @@ final class AppDependencies {
 extension EnvironmentValues {
     @Entry var authRepository: any AuthRepository = AppDependencies.live.authRepository
     @Entry var userSession: UserSession = AppDependencies.live.userSession
+    @Entry var expenseRepository: any ExpenseRepository = AppDependencies.live.expenseRepository
+    @Entry var categoryRepository: any CategoryRepository = AppDependencies.live.categoryRepository
 }

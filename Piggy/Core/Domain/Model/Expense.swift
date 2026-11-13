@@ -45,3 +45,20 @@ nonisolated struct ExpenseUpdate: Hashable, Sendable {
     var isFixed: Bool? = nil
     var categoryName: String? = nil // allow updating denormalized field when category changes
 }
+
+nonisolated extension ExpenseUpdate {
+    /// Only the fields that differ between the original and the edited form.
+    init(from original: Expense, to form: ExpenseFormData) {
+        self.init(
+            name: form.name == original.name ? nil : form.name,
+            amount: form.amount == original.amount ? nil : form.amount,
+            date: form.date == original.date ? nil : form.date,
+            categoryId: form.categoryId == original.categoryId ? nil : form.categoryId,
+            isFixed: form.isFixed == original.isFixed ? nil : form.isFixed
+        )
+    }
+
+    var isEmpty: Bool {
+        name == nil && amount == nil && date == nil && categoryId == nil && isFixed == nil
+    }
+}
